@@ -1,0 +1,41 @@
+<!-- TO RUN:  python app.py
+DATABASE: MySQL(indian_railway->table:passenger). -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Railway Database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Passenger List</h1>
+        <table>
+            <tr>
+                <th>Passenger ID</th>
+                <th>Passenger Name</th>
+                <th>Train Number</th>
+                <th>PNR ID</th>
+                <th>Ticket Price</th>
+                <th>Actions</th>
+            </tr>
+            {% for passenger in passengers %}
+            <tr>
+                <td>{{ passenger.passenger_id }}</td>
+                <td>{{ passenger.passenger_name }}</td>
+                <td>{{ passenger.train_number }}</td>
+                <td>{{ passenger.pnr_id }}</td>
+                <td>{{ passenger.ticket_price }}</td>
+                <td>
+                    <a href="{{ url_for('update', id=passenger.id) }}">Update</a>
+                    <a href="{{ url_for('delete', id=passenger.id) }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('insert') }}">Insert New Passenger</a>
+    </div>
+</body>
+</html>
